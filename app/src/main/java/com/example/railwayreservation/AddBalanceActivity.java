@@ -70,6 +70,9 @@ public class AddBalanceActivity extends AppCompatActivity {
                 if(cardNo.isEmpty() || cvv.isEmpty() || amount.isEmpty() || type.isEmpty()) {
                     Toast.makeText(AddBalanceActivity.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
                 } else {
+                    txtCardNo.getText().clear();
+                    txtCVV.getText().clear();
+                    txtAmount.getText().clear();
                     Toast.makeText(AddBalanceActivity.this, "Payment Successful", Toast.LENGTH_SHORT).show();
                     bal += Integer.parseInt(amount);
                     String balance = "Current Balance: ₹" + bal;
