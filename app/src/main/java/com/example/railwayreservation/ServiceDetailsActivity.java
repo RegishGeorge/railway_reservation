@@ -27,7 +27,6 @@ import java.util.List;
 import static com.example.railwayreservation.AccountActivity.USERNAME;
 import static com.example.railwayreservation.BookTicketActivity.START;
 import static com.example.railwayreservation.BookTicketActivity.STOP;
-import static com.example.railwayreservation.NotificationChannel.BOOKING_CHANNEL_ID;
 
 public class ServiceDetailsActivity extends AppCompatActivity {
     private static final String TAG = "ServiceDetailsActivity";
