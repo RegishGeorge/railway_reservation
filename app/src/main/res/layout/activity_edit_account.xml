@@ -7,14 +7,27 @@
     tools:context=".EditAccountActivity">
 
     <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Edit Account"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/txt_firstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="20dp"
         android:text="First Name:"
-        android:textSize="20sp"
-        android:layout_margin="20dp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
         android:id="@+id/edit_txt_firstName"
@@ -23,7 +36,7 @@
         android:layout_marginStart="8dp"
         android:text="First Name"
         android:inputType="textPersonName"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/txt_firstName"
         app:layout_constraintStart_toEndOf="@+id/txt_firstName"
         app:layout_constraintTop_toTopOf="@+id/txt_firstName" />
@@ -34,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="Last Name:"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_firstName" />
 
@@ -45,7 +58,7 @@
         android:layout_marginStart="8dp"
         android:text="Last Name"
         android:inputType="textPersonName"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/txt_lastName"
         app:layout_constraintStart_toEndOf="@+id/txt_lastName"
         app:layout_constraintTop_toTopOf="@+id/txt_lastName" />
@@ -56,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="Email ID: "
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_lastName" />
 
@@ -66,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="Mobile No.:"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_email" />
 
@@ -78,7 +91,7 @@
         android:text="Mobile No."
         android:inputType="numberSigned"
         android:maxLength="10"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/txt_mobile"
         app:layout_constraintStart_toEndOf="@+id/txt_mobile"
         app:layout_constraintTop_toTopOf="@+id/txt_mobile" />
@@ -91,7 +104,7 @@
         android:hint="Current Password"
         android:visibility="gone"
         android:inputType="textPassword"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_txt_mobile" />
@@ -104,7 +117,7 @@
         android:hint="New Password"
         android:visibility="gone"
         android:inputType="textPassword"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_txt_curPass" />
@@ -118,7 +131,7 @@
         android:hint="Confirm Password"
         android:visibility="gone"
         android:inputType="textPassword"
-        android:textSize="20sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_text_newPass" />
