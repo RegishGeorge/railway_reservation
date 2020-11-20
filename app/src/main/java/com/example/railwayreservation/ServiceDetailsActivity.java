@@ -1,17 +1,14 @@
 package com.example.railwayreservation;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.AlertDialog;
-import android.app.Notification;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -34,7 +31,7 @@ public class ServiceDetailsActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton ac1, ac2, ac3, cc, sl;
     private NumberPicker numberPicker;
-    private Button btnCheck, btnBook;
+    private Button btnCheck, btnAddBalance, btnBook;
     private RailwayReservationViewModel viewModel;
     private RailwayReservationRepository repository;
     private int ac1No=0, ac2No=0, ac3No=0, ccNo=0, slNo=0;
@@ -63,6 +60,7 @@ public class ServiceDetailsActivity extends AppCompatActivity {
         sl = findViewById(R.id.sl);
         numberPicker = findViewById(R.id.numberPicker);
         btnCheck = findViewById(R.id.btn_check);
+        btnAddBalance = findViewById(R.id.btn_add_balance);
         btnBook = findViewById(R.id.btn_book);
 
         rid = getIntent().getIntExtra("route_id", 0);
@@ -104,6 +102,8 @@ public class ServiceDetailsActivity extends AppCompatActivity {
         btnCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                btnAddBalance.setVisibility(View.GONE);
+                txtBalance.setVisibility(View.GONE);
                 isAC1 = false; isAC2 = false; isAC3 = false; isCC = false; isSL= false;
                 switch (radioGroup.getCheckedRadioButtonId()) {
                     case R.id.ac1:
@@ -182,6 +182,16 @@ public class ServiceDetailsActivity extends AppCompatActivity {
             }
         });
 
+        btnAddBalance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ServiceDetailsActivity.this, AddBalanceActivity.class);
+                startActivity(intent);
+                txtBalance.setVisibility(View.GONE);
+                btnAddBalance.setVisibility(View.GONE);
+            }
+        });
+
         btnBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,6 +201,7 @@ public class ServiceDetailsActivity extends AppCompatActivity {
                     String text = "Available Balance: ₹" + balance;
                     txtBalance.setText(text);
                     txtBalance.setVisibility(View.VISIBLE);
+                    btnAddBalance.setVisibility(View.VISIBLE);
                 } else {
                     balance -= price;
                     tempUser.setBalance(balance);
