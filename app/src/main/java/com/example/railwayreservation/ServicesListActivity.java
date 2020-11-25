@@ -17,14 +17,10 @@ import static com.example.railwayreservation.BookTicketActivity.START;
 import static com.example.railwayreservation.BookTicketActivity.STOP;
 
 public class ServicesListActivity extends AppCompatActivity {
-    private TextView txtNoService;
+    private TextView txtNoService, txtTitle;
     private CardView cardView;
     private RecyclerView recyclerView;
     private RailwayReservationViewModel viewModel;
-//    private List<ServicesList> services;
-//    private List<Integer> stationID;
-//    private List<TrainSeat> trainSeats;
-//    private int rid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +28,7 @@ public class ServicesListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_services_list);
 
         txtNoService = findViewById(R.id.txtNoService);
+        txtTitle = findViewById(R.id.txt_title);
         cardView = findViewById(R.id.cardView);
         recyclerView = findViewById(R.id.recyclerView);
 
@@ -46,11 +43,13 @@ public class ServicesListActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<ServicesList> services) {
                 if(services.size()==0) {
+                    txtTitle.setVisibility(View.GONE);
                     cardView.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.GONE);
                     txtNoService.setVisibility(View.VISIBLE);
                 } else {
                     txtNoService.setVisibility(View.GONE);
+                    txtTitle.setVisibility(View.VISIBLE);
                     cardView.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.VISIBLE);
                     adapter.setRoutes(services);

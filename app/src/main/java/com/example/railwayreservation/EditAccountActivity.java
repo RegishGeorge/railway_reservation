@@ -72,6 +72,13 @@ public class EditAccountActivity extends AppCompatActivity {
                 if(changePassClicked) {
                     if(firstName.isEmpty() || lastName.isEmpty() || mobile == 0 || curPass.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
                         Toast.makeText(EditAccountActivity.this, "Please provide all the fields", Toast.LENGTH_SHORT).show();
+                    } else if(mobile < 1000000000) {
+                        EditAccountActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(EditAccountActivity.this, "Please enter a valid mobile number", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     } else {
                         if(curPass.equals(pass)) {
                             if(confirm.equals(password)) {
@@ -88,6 +95,13 @@ public class EditAccountActivity extends AppCompatActivity {
                 } else {
                     if(firstName.isEmpty() || lastName.isEmpty() || mobile == 0) {
                         Toast.makeText(EditAccountActivity.this, "Please provide all the fields", Toast.LENGTH_SHORT).show();
+                    } else if(mobile < 1000000000) {
+                        EditAccountActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(EditAccountActivity.this, "Please enter a valid mobile number", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     } else {
                         viewModel.update_user(new User(USERNAME, firstName, lastName, mobile, password, balance));
                         Toast.makeText(EditAccountActivity.this, "Updated Successfully", Toast.LENGTH_SHORT).show();

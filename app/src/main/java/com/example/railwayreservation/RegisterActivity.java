@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText txtFirstName, txtLastName, txtEmail, txtMobile, txtPassword, txtConfirm;
     private Button btnRegister;
     private RailwayReservationViewModel viewModel;
+    private RailwayReservationRepository repository;
     private boolean alreadyExist = false;
 
     @Override
@@ -35,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btn_register);
 
         viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(RailwayReservationViewModel.class);
+        repository = new RailwayReservationRepository(getApplication());
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,42 +54,71 @@ public class RegisterActivity extends AppCompatActivity {
                 password = txtPassword.getText().toString().trim();
                 confirm = txtConfirm.getText().toString().trim();
                 final long temp = mobile;
-                viewModel.getAllUsers().observe(RegisterActivity.this, new Observer<List<User>>() {
+
+                AsyncTask.execute(new Runnable() {
                     @Override
-                    public void onChanged(List<User> users) {
+                    public void run() {
+                        List<User> users = repository.getAllUsers();
                         for (User u : users) {
                             if (u.getEmail_ID().equals(email)) {
                                 alreadyExist = true;
                                 break;
                             }
                         }
-                    }
-                });
-                if(alreadyExist) {
-                    Toast.makeText(RegisterActivity.this, "Account already exists", Toast.LENGTH_SHORT).show();
-                } else {
-                    if(firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || temp==0 || password.isEmpty()) {
-                        Toast.makeText(RegisterActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
-                    } else {
-                        if(password.equals(confirm)) {
-                            viewModel.insert_user(new User(email, firstName, lastName, temp, password, 0));
-                            Toast.makeText(RegisterActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
-                            txtFirstName.getText().clear();
-                            txtLastName.getText().clear();
-                            txtEmail.getText().clear();
-                            txtMobile.getText().clear();
-                            txtPassword.getText().clear();
-                            txtConfirm.getText().clear();
-                            Intent intent = new Intent(RegisterActivity.this, AccountActivity.class);
-                            intent.putExtra("Username", email);
-                            intent.putExtra("Name", firstName);
-                            startActivity(intent);
-                            finish();
+                        if(alreadyExist) {
+                            RegisterActivity.this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(RegisterActivity.this, "Account already exists", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Please check your password", Toast.LENGTH_SHORT).show();
+                            if(firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || temp==0 || password.isEmpty()) {
+                                RegisterActivity.this.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(RegisterActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            } else if(temp < 1000000000) {
+                                RegisterActivity.this.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(RegisterActivity.this, "Please enter a valid mobile number", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            } else {
+                                if(password.equals(confirm)) {
+                                    viewModel.insert_user(new User(email, firstName, lastName, temp, password, 0));
+                                    RegisterActivity.this.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(RegisterActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                    txtFirstName.getText().clear();
+                                    txtLastName.getText().clear();
+                                    txtEmail.getText().clear();
+                                    txtMobile.getText().clear();
+                                    txtPassword.getText().clear();
+                                    txtConfirm.getText().clear();
+                                    Intent intent = new Intent(RegisterActivity.this, AccountActivity.class);
+                                    intent.putExtra("Username", email);
+                                    intent.putExtra("Name", firstName);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    RegisterActivity.this.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(RegisterActivity.this, "Please check your password", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }
                         }
                     }
-                }
+                });
             }
         });
     }

@@ -13,7 +13,7 @@ import static android.content.ContentValues.TAG;
 
 public class RailwayReservationRepository {
     private RailwayReservationDao railwayReservationDao;
-    private LiveData<List<User>> allUsers;
+    private List<User> allUsers;
     private LiveData<List<User>> loginList;
     private LiveData<List<ServicesList>> services;
     private LiveData<List<String>> allStations;
@@ -30,7 +30,6 @@ public class RailwayReservationRepository {
     public RailwayReservationRepository(Application application) {
         RailwayReservationDatabase database = RailwayReservationDatabase.getInstance(application);
         railwayReservationDao = database.railwayReservationDao();
-        allUsers = railwayReservationDao.getAllUsers();
         allStations = railwayReservationDao.getAllStations();
     }
 
@@ -70,7 +69,8 @@ public class RailwayReservationRepository {
         new DeleteTrainSeatAsyncTask(railwayReservationDao).execute(trainSeat);
     }
 
-    public LiveData<List<User>> getAllUsers() {
+    public List<User> getAllUsers() {
+        allUsers = railwayReservationDao.getAllUsers();
         return allUsers;
     }
 

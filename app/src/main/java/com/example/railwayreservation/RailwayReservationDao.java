@@ -57,7 +57,7 @@ public interface RailwayReservationDao {
     void delete_train_seat(TrainSeat trainSeat);
 
     @Query("SELECT * FROM USER")
-    LiveData<List<User>> getAllUsers();
+    List<User> getAllUsers();
 
     @Query("SELECT * FROM USER WHERE email_ID = :email")
     LiveData<List<User>> getLoginList(String email);

@@ -13,7 +13,6 @@ import static android.content.ContentValues.TAG;
 
 public class RailwayReservationViewModel extends AndroidViewModel {
     private RailwayReservationRepository repository;
-    private LiveData<List<User>> allUsers;
     private LiveData<List<User>> loginList;
     private LiveData<List<ServicesList>> services;
     private LiveData<List<String>> allStations;
@@ -23,12 +22,10 @@ public class RailwayReservationViewModel extends AndroidViewModel {
     private LiveData<List<Booking>> bookings;
     private LiveData<List<TTE>> TTEList;
     private LiveData<List<Booking>> ticket;
-//    private LiveData<List<Booking>> allBookings;
 
     public RailwayReservationViewModel(@NonNull Application application) {
         super(application);
         repository = new RailwayReservationRepository(application);
-        allUsers = repository.getAllUsers();
         allStations = repository.getAllStations();
     }
 
@@ -66,10 +63,6 @@ public class RailwayReservationViewModel extends AndroidViewModel {
 
     public void delete_train_seat(TrainSeat trainSeat) {
         repository.delete_train_seat(trainSeat);
-    }
-
-    public LiveData<List<User>> getAllUsers() {
-        return allUsers;
     }
 
     public LiveData<List<String>> getAllStations() {
@@ -115,9 +108,4 @@ public class RailwayReservationViewModel extends AndroidViewModel {
         ticket = repository.getTicket(tid);
         return ticket;
     }
-
-//    public LiveData<List<Booking>> getAllBookings(String trainName) {
-//        allBookings = repository.getAllBookings(trainName);
-//        return allBookings;
-//    }
 }
