@@ -33,9 +33,6 @@ public interface RailwayReservationDao {
     void insert_booking(Booking booking);
 
     @Insert
-    void insert_seat(Seat seat);
-
-    @Insert
     void insert_train_seat(TrainSeat trainSeat);
 
     @Insert
@@ -43,9 +40,6 @@ public interface RailwayReservationDao {
 
     @Update
     void update_user(User user);
-
-    @Update
-    void update_train(Train train);
 
     @Update
     void update_train_seat(TrainSeat trainSeat);

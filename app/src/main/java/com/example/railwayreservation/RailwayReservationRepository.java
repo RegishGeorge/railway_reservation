@@ -41,20 +41,12 @@ public class RailwayReservationRepository {
         new InsertBookingAsyncTask(railwayReservationDao).execute(booking);
     }
 
-    public void insert_seat(Seat seat) {
-        new InsertSeatAsyncTask(railwayReservationDao).execute(seat);
-    }
-
     public void insert_train_seat(TrainSeat trainSeat) {
         new InsertTrainSeatAsyncTask(railwayReservationDao).execute(trainSeat);
     }
 
     public void update_user(User user) {
         new UpdateUserAsyncTask(railwayReservationDao).execute(user);
-    }
-
-    public void update_train(Train train) {
-        new UpdateTrainAsyncTask(railwayReservationDao).execute(train);
     }
 
     public void update_train_seat(TrainSeat trainSeat) {
@@ -161,20 +153,6 @@ public class RailwayReservationRepository {
         }
     }
 
-    private static class InsertSeatAsyncTask extends AsyncTask<Seat, Void, Void> {
-        private RailwayReservationDao railwayReservationDao;
-
-        private InsertSeatAsyncTask(RailwayReservationDao railwayReservationDao) {
-            this.railwayReservationDao = railwayReservationDao;
-        }
-
-        @Override
-        protected Void doInBackground(Seat... seats) {
-            railwayReservationDao.insert_seat(seats[0]);
-            return null;
-        }
-    }
-
     private static class InsertTrainSeatAsyncTask extends AsyncTask<TrainSeat, Void, Void> {
         private RailwayReservationDao railwayReservationDao;
 
@@ -199,20 +177,6 @@ public class RailwayReservationRepository {
         @Override
         protected Void doInBackground(User... users) {
             railwayReservationDao.update_user(users[0]);
-            return null;
-        }
-    }
-
-    private static class UpdateTrainAsyncTask extends AsyncTask<Train, Void, Void> {
-        private RailwayReservationDao railwayReservationDao;
-
-        private UpdateTrainAsyncTask(RailwayReservationDao railwayReservationDao) {
-            this.railwayReservationDao = railwayReservationDao;
-        }
-
-        @Override
-        protected Void doInBackground(Train... trains) {
-            railwayReservationDao.update_train(trains[0]);
             return null;
         }
     }
