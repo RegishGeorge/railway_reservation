@@ -9,7 +9,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {User.class, Route.class, Station.class, Train.class, RouteDetails.class, Service.class, Booking.class, Seat.class, TrainSeat.class, TTE.class}, version = 1)
+@Database(entities = {User.class, Route.class, Station.class, Train.class, RouteDetails.class, Service.class, Booking.class, TrainSeat.class, TTE.class}, version = 1)
 public abstract class RailwayReservationDatabase extends RoomDatabase {
     private static final String DB_NAME = "railway_reservation";
     private static RailwayReservationDatabase instance;
@@ -44,7 +44,7 @@ public abstract class RailwayReservationDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(Void... voids) {
             //TODO: Add data to database
-            railwayReservationDao.insert_user(new User("regish", "Regish", "George", 9048791233L, "regish", 5000));
+            railwayReservationDao.insert_user(new User("regish", "Regish", "George", 9048791233L, "regish", 0));
 
             railwayReservationDao.insert_route(new Route("TVC-KGQ", 10));
 
@@ -75,8 +75,6 @@ public abstract class RailwayReservationDatabase extends RoomDatabase {
 
             railwayReservationDao.insert_service(new Service(1, 1, 9, 30));
             railwayReservationDao.insert_service(new Service(1, 2, 23, 15));
-
-            railwayReservationDao.insert_TTE(new TTE("regish", "regish", "Regish"));
 
             return null;
         }

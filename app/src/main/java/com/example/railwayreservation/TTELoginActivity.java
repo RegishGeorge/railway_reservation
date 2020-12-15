@@ -51,7 +51,7 @@ public class TTELoginActivity extends AppCompatActivity {
                                     intent.putExtra("Name", ttes.get(0).getName());
                                     startActivity(intent);
                                 } else {
-                                    Toast.makeText(TTELoginActivity.this, "Invalid password", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(TTELoginActivity.this, "Incorrect password", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }

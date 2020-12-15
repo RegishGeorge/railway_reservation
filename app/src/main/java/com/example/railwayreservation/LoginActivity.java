@@ -37,25 +37,35 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String email = txtUsername.getText().toString().trim();
                 final String password = txtPassword.getText().toString().trim();
-                viewModel.getLoginList(email).observe(LoginActivity.this, new Observer<List<User>>() {
-                    @Override
-                    public void onChanged(List<User> users) {
-                        if(users.size() == 0) {
-                            Toast.makeText(LoginActivity.this, "Invalid username", Toast.LENGTH_SHORT).show();
-                        } else {
-                            if(password.equals(users.get(0).getPassword())) {
-                                txtUsername.getText().clear();
-                                txtPassword.getText().clear();
-                                Intent intent = new Intent(LoginActivity.this, AccountActivity.class);
-                                intent.putExtra("Username", email);
-                                intent.putExtra("Name", users.get(0).getFirst_name());
-                                startActivity(intent);
+                if(email.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "All fields are required!", Toast.LENGTH_SHORT).show();
+                } else {
+                    viewModel.getLoginList(email).observe(LoginActivity.this, new Observer<List<User>>() {
+                        @Override
+                        public void onChanged(List<User> users) {
+                            if(users.size() == 0) {
+                                Toast.makeText(LoginActivity.this, "Invalid username", Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(LoginActivity.this, "Incorrect password", Toast.LENGTH_SHORT).show();
+                                if(password.equals(users.get(0).getPassword())) {
+                                    txtUsername.getText().clear();
+                                    txtPassword.getText().clear();
+                                    if(email.equals("regish") && password.equals("regish")) {
+                                        Intent adminIntent = new Intent(LoginActivity.this, AdminActivity.class);
+                                        adminIntent.putExtra("Name", users.get(0).getFirst_name());
+                                        startActivity(adminIntent);
+                                    } else {
+                                        Intent intent = new Intent(LoginActivity.this, AccountActivity.class);
+                                        intent.putExtra("Username", email);
+                                        intent.putExtra("Name", users.get(0).getFirst_name());
+                                        startActivity(intent);
+                                    }
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "Incorrect password", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
-                    }
-                });
+                    });
+                }
             }
         });
 

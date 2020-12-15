@@ -45,6 +45,10 @@ public class RailwayReservationRepository {
         new InsertTrainSeatAsyncTask(railwayReservationDao).execute(trainSeat);
     }
 
+    public void insert_tte(TTE tte) {
+        new InsertTTEAsyncTask(railwayReservationDao).execute(tte);
+    }
+
     public void update_user(User user) {
         new UpdateUserAsyncTask(railwayReservationDao).execute(user);
     }
@@ -163,6 +167,20 @@ public class RailwayReservationRepository {
         @Override
         protected Void doInBackground(TrainSeat... trainSeats) {
             railwayReservationDao.insert_train_seat(trainSeats[0]);
+            return null;
+        }
+    }
+
+    private static class InsertTTEAsyncTask extends AsyncTask<TTE, Void, Void> {
+        private RailwayReservationDao railwayReservationDao;
+
+        private InsertTTEAsyncTask(RailwayReservationDao railwayReservationDao) {
+            this.railwayReservationDao = railwayReservationDao;
+        }
+
+        @Override
+        protected Void doInBackground(TTE... ttes) {
+            railwayReservationDao.insert_TTE(ttes[0]);
             return null;
         }
     }

@@ -37,21 +37,17 @@ public class RailwayReservationViewModel extends AndroidViewModel {
         repository.insert_booking(booking);
     }
 
-//    public void insert_seat(Seat seat) {
-//        repository.insert_seat(seat);
-//    }
-
     public void insert_train_seat(TrainSeat trainSeat) {
         repository.insert_train_seat(trainSeat);
+    }
+
+    public void insert_tte(TTE tte) {
+        repository.insert_tte(tte);
     }
 
     public void update_user(User user) {
         repository.update_user(user);
     }
-
-//    public void update_train(Train train) {
-//        repository.update_train(train);
-//    }
 
     public void update_train_seat(TrainSeat trainSeat) {
         repository.update_train_seat(trainSeat);
@@ -60,10 +56,6 @@ public class RailwayReservationViewModel extends AndroidViewModel {
     public void update_booking(Booking booking) {
         repository.update_booking(booking);
     }
-
-//    public void delete_train_seat(TrainSeat trainSeat) {
-//        repository.delete_train_seat(trainSeat);
-//    }
 
     public LiveData<List<String>> getAllStations() {
         return allStations;
