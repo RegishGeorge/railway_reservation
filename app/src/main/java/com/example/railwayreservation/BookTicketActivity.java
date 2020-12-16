@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -18,7 +17,6 @@ import java.util.List;
 
 public class BookTicketActivity extends AppCompatActivity {
     public static String START, STOP;
-    private static final String TAG = "BookTicketActivity";
     private AutoCompleteTextView txtFrom, txtTo;
     private Button btnFind;
     private RailwayReservationViewModel viewModel;
@@ -47,7 +45,7 @@ public class BookTicketActivity extends AppCompatActivity {
             public void onClick(View v) {
                 START = txtFrom.getText().toString().trim();
                 STOP = txtTo.getText().toString().trim();
-                if(START.isEmpty() || STOP.isEmpty()) {
+                if (START.isEmpty() || STOP.isEmpty()) {
                     Toast.makeText(BookTicketActivity.this, "Please provide both the fields!", Toast.LENGTH_SHORT).show();
                 } else {
                     txtFrom.getText().clear();

@@ -1,15 +1,11 @@
 package com.example.railwayreservation;
 
 import android.app.Application;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 public class RailwayReservationRepository {
     private RailwayReservationDao railwayReservationDao;
@@ -137,10 +133,6 @@ public class RailwayReservationRepository {
     public List<TrainSeat> getTrainList(int tid) {
         trainList = railwayReservationDao.getTrainList(tid);
         return trainList;
-    }
-
-    public void delete_trains(int tid) {
-        railwayReservationDao.delete_trains(tid);
     }
 
     private static class InsertUserAsyncTask extends AsyncTask<User, Void, Void> {

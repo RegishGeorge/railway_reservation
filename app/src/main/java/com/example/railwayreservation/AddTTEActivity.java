@@ -1,7 +1,6 @@
 package com.example.railwayreservation;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.AsyncTask;
@@ -38,14 +37,14 @@ public class AddTTEActivity extends AppCompatActivity {
                 final String name = txtName.getText().toString().trim();
                 final String username = txtUsername.getText().toString().trim();
                 final String password = txtPassword.getText().toString().trim();
-                if(name.isEmpty() || username.isEmpty() || password.isEmpty()) {
+                if (name.isEmpty() || username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(AddTTEActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
                 } else {
                     AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
                             List<TTE> ttes = repository.getTTEList(username);
-                            if(ttes.size()>0) {
+                            if (ttes.size() > 0) {
                                 AddTTEActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {

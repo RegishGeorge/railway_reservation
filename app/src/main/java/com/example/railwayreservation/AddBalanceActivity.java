@@ -67,13 +67,13 @@ public class AddBalanceActivity extends AppCompatActivity {
                         type = "Credit card";
                         break;
                 }
-                if(cardNo.isEmpty() || cvv.isEmpty() || amount.isEmpty() || type.isEmpty()) {
+                if (cardNo.isEmpty() || cvv.isEmpty() || amount.isEmpty() || type.isEmpty()) {
                     Toast.makeText(AddBalanceActivity.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
-                } else if(cardNo.length() < 16) {
+                } else if (cardNo.length() < 16) {
                     Toast.makeText(AddBalanceActivity.this, "Please enter a valid card number", Toast.LENGTH_SHORT).show();
-                } else if(cvv.length() < 3) {
+                } else if (cvv.length() < 3) {
                     Toast.makeText(AddBalanceActivity.this, "Please enter a valid CVV number", Toast.LENGTH_SHORT).show();
-                } else if(Integer.parseInt(amount) == 0) {
+                } else if (Integer.parseInt(amount) == 0) {
                     Toast.makeText(AddBalanceActivity.this, "Minimum amount allowed is ₹1", Toast.LENGTH_SHORT).show();
                 } else {
                     txtCardNo.getText().clear();

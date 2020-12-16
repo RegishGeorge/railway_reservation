@@ -42,7 +42,7 @@ public class ServicesListActivity extends AppCompatActivity {
         viewModel.getServices(START, STOP).observe(this, new Observer<List<ServicesList>>() {
             @Override
             public void onChanged(List<ServicesList> services) {
-                if(services.size()==0) {
+                if (services.size() == 0) {
                     txtTitle.setVisibility(View.GONE);
                     cardView.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.GONE);

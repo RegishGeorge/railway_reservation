@@ -1,13 +1,11 @@
 package com.example.railwayreservation;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +15,6 @@ import android.widget.Toast;
 import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
-    private static final String TAG = "RegisterActivity";
     private EditText txtFirstName, txtLastName, txtEmail, txtMobile, txtPassword, txtConfirm;
     private Button btnRegister;
     private RailwayReservationViewModel viewModel;
@@ -49,13 +46,12 @@ public class RegisterActivity extends AppCompatActivity {
                 firstName = txtFirstName.getText().toString().trim();
                 lastName = txtLastName.getText().toString().trim();
                 email = txtEmail.getText().toString().trim();
-                if(!txtMobile.getText().toString().trim().isEmpty()) {
+                if (!txtMobile.getText().toString().trim().isEmpty()) {
                     mobile = Long.parseLong(txtMobile.getText().toString().trim());
                 }
                 password = txtPassword.getText().toString().trim();
                 confirm = txtConfirm.getText().toString().trim();
                 final long temp = mobile;
-
                 AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
@@ -66,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 break;
                             }
                         }
-                        if(alreadyExist) {
+                        if (alreadyExist) {
                             RegisterActivity.this.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -74,21 +70,21 @@ public class RegisterActivity extends AppCompatActivity {
                                 }
                             });
                         } else {
-                            if(firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || temp==0 || password.isEmpty()) {
+                            if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || temp == 0 || password.isEmpty()) {
                                 RegisterActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         Toast.makeText(RegisterActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
                                     }
                                 });
-                            } else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                            } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                                 RegisterActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         Toast.makeText(RegisterActivity.this, "Please enter a valid email ID", Toast.LENGTH_SHORT).show();
                                     }
                                 });
-                            } else if(temp < 1000000000) {
+                            } else if (temp < 1000000000) {
                                 RegisterActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -96,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     }
                                 });
                             } else {
-                                if(password.equals(confirm)) {
+                                if (password.equals(confirm)) {
                                     viewModel.insert_user(new User(email, firstName, lastName, temp, password, 0));
                                     RegisterActivity.this.runOnUiThread(new Runnable() {
                                         @Override

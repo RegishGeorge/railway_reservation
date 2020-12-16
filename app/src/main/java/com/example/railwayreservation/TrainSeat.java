@@ -4,13 +4,14 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 
 @Entity(foreignKeys = {@ForeignKey(entity = Route.class, parentColumns = "route_id", childColumns = "route_id"),
-@ForeignKey(entity = Station.class, parentColumns = "station_id", childColumns = "station_id"),
-@ForeignKey(entity = Train.class, parentColumns = "train_id", childColumns = "train_id")},
-primaryKeys = {"route_id", "station_id", "train_id"})
+        @ForeignKey(entity = Station.class, parentColumns = "station_id", childColumns = "station_id"),
+        @ForeignKey(entity = Train.class, parentColumns = "train_id", childColumns = "train_id")},
+        primaryKeys = {"route_id", "station_id", "train_id"})
 public class TrainSeat {
     private int route_id;
     private int station_id;
     private int train_id;
+
     private int ac1_no, ac2_no, ac3_no, cc_no, sleeper_no;
 
     public TrainSeat(int route_id, int station_id, int train_id, int ac1_no, int ac2_no, int ac3_no, int cc_no, int sleeper_no) {

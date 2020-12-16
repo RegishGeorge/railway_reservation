@@ -4,8 +4,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 
 @Entity(foreignKeys = {@ForeignKey(entity = Route.class, parentColumns = "route_id", childColumns = "route_id"),
-@ForeignKey(entity = Train.class, parentColumns = "train_id", childColumns = "train_id")},
-primaryKeys = {"route_id", "train_id"})
+        @ForeignKey(entity = Train.class, parentColumns = "train_id", childColumns = "train_id")},
+        primaryKeys = {"route_id", "train_id"})
 public class Service {
     private int route_id;
     private int train_id;

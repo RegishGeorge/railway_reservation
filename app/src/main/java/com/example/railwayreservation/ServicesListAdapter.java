@@ -34,22 +34,22 @@ public class ServicesListAdapter extends RecyclerView.Adapter<ServicesListAdapte
     public void onBindViewHolder(@NonNull ServicesListHolder holder, int position) {
         final ServicesList currentService = services.get(position);
         String departure_hr, departure_min, arrival_hr, arrival_min;
-        if(currentService.getDeparture_hr() < 10) {
+        if (currentService.getDeparture_hr() < 10) {
             departure_hr = "0" + currentService.getDeparture_hr();
         } else {
             departure_hr = Integer.toString(currentService.getDeparture_hr());
         }
-        if(currentService.getDeparture_min() < 10) {
+        if (currentService.getDeparture_min() < 10) {
             departure_min = "0" + currentService.getDeparture_min();
         } else {
             departure_min = Integer.toString(currentService.getDeparture_min());
         }
-        if(currentService.getArrival_hr() < 10) {
+        if (currentService.getArrival_hr() < 10) {
             arrival_hr = "0" + currentService.getArrival_hr();
         } else {
             arrival_hr = Integer.toString(currentService.getArrival_hr());
         }
-        if(currentService.getArrival_min() < 10) {
+        if (currentService.getArrival_min() < 10) {
             arrival_min = "0" + currentService.getArrival_min();
         } else {
             arrival_min = Integer.toString(currentService.getArrival_min());
@@ -58,19 +58,19 @@ public class ServicesListAdapter extends RecyclerView.Adapter<ServicesListAdapte
         final String arrival = arrival_hr + ":" + arrival_min;
         String time = departure + " - " + arrival;
         String classes = "";
-        if(currentService.getAc1_no()>0) {
+        if (currentService.getAc1_no() > 0) {
             classes += "1AC ";
         }
-        if(currentService.getAc2_no()>0) {
+        if (currentService.getAc2_no() > 0) {
             classes += "2AC ";
         }
-        if(currentService.getAc3_no()>0) {
+        if (currentService.getAc3_no() > 0) {
             classes += "3AC ";
         }
-        if(currentService.getCc_no()>0) {
+        if (currentService.getCc_no() > 0) {
             classes += "CC ";
         }
-        if(currentService.getSleeper_no()>0) {
+        if (currentService.getSleeper_no() > 0) {
             classes += "SL ";
         }
         holder.txtServiceName.setText(currentService.getTrain_name());

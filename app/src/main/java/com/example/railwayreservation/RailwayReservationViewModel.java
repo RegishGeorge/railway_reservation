@@ -1,15 +1,12 @@
 package com.example.railwayreservation;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 public class RailwayReservationViewModel extends AndroidViewModel {
     private RailwayReservationRepository repository;
@@ -20,9 +17,7 @@ public class RailwayReservationViewModel extends AndroidViewModel {
     private LiveData<List<RouteDetails>> price;
     private LiveData<List<Integer>> stationID;
     private LiveData<List<Booking>> bookings;
-    private LiveData<List<TTE>> TTEList;
     private LiveData<List<Booking>> ticket;
-    private LiveData<List<TrainSeat>> trainList;
 
     public RailwayReservationViewModel(@NonNull Application application) {
         super(application);
@@ -60,10 +55,6 @@ public class RailwayReservationViewModel extends AndroidViewModel {
 
     public void update_train(Train train) {
         repository.update_train(train);
-    }
-
-    public void delete_train_seat(TrainSeat trainSeat) {
-        repository.delete_train_seat(trainSeat);
     }
 
     public LiveData<List<String>> getAllStations() {

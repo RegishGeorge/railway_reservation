@@ -38,7 +38,7 @@ public class CurrentlyBookedActivity extends AppCompatActivity {
         viewModel.getBookings(USERNAME).observe(this, new Observer<List<Booking>>() {
             @Override
             public void onChanged(List<Booking> bookings) {
-                if(bookings.size()>0) {
+                if (bookings.size() > 0) {
                     txtTitle.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.VISIBLE);
                     txtNoTickets.setVisibility(View.GONE);

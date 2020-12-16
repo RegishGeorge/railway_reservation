@@ -1,13 +1,9 @@
 package com.example.railwayreservation;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +12,6 @@ import android.widget.Toast;
 import java.util.List;
 
 public class TrainStatusActivity extends AppCompatActivity {
-    private static final String TAG = "TrainStatusActivity";
     private EditText txtRouteID, txtTrainID;
     private Button btnComplete;
     private RailwayReservationRepository repository;
@@ -39,22 +34,19 @@ public class TrainStatusActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String routeID = txtRouteID.getText().toString().trim();
                 final String trainID = txtTrainID.getText().toString().trim();
-                if(routeID.isEmpty() || trainID.isEmpty()) {
+                if (routeID.isEmpty() || trainID.isEmpty()) {
                     Toast.makeText(TrainStatusActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.d(TAG, "onClick: " + routeID + " " + trainID);
                     AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
                             int rid = Integer.parseInt(routeID);
                             int tid = Integer.parseInt(trainID);
-                            Log.d(TAG, "run: rid tid " + rid + " " + tid);
                             bookings = repository.getAllBookings(rid, tid);
-                            Log.d(TAG, "run: bookings size " + bookings.size());
-                            if(bookings.size() > 0) {
+                            if (bookings.size() > 0) {
                                 txtRouteID.getText().clear();
                                 txtTrainID.getText().clear();
-                                for(Booking b: bookings) {
+                                for (Booking b : bookings) {
                                     b.setStatus("Expired");
                                     repository.update_booking(b);
                                 }
@@ -81,8 +73,8 @@ public class TrainStatusActivity extends AppCompatActivity {
             @Override
             public void run() {
                 trainSeats = repository.getList(rid, tid);
-                if(trainSeats.size() > 0) {
-                    for(TrainSeat ts: trainSeats) {
+                if (trainSeats.size() > 0) {
+                    for (TrainSeat ts : trainSeats) {
                         repository.delete_train_seat(ts);
                     }
                 }

@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -37,9 +36,9 @@ public class BookedTicketsAdapter extends RecyclerView.Adapter<BookedTicketsAdap
         holder.nTickets.setText("No. of tickets: " + currentBooking.getTickets_no());
         String status = currentBooking.getStatus();
         holder.status.setText(status);
-        if(status.equals("Booked")) {
+        if (status.equals("Booked")) {
             holder.status.setTextColor(Color.parseColor("#fc8803"));
-        } else if(status.equals("Boarded")) {
+        } else if (status.equals("Boarded")) {
             holder.status.setTextColor(Color.parseColor("#03fc07"));
         } else {
             holder.status.setTextColor(Color.parseColor("#ff0000"));

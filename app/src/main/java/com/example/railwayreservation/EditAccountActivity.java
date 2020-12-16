@@ -15,7 +15,6 @@ import java.util.List;
 
 import static com.example.railwayreservation.AccountActivity.USERNAME;
 
-
 public class EditAccountActivity extends AppCompatActivity {
     private Button btnChangePass, btnSave;
     private EditText editTxtFirstName, editTxtLastName, editTxtMobile, editTxtCurPass, editTxtNewPass, editTxtConfirmPass;
@@ -63,16 +62,16 @@ public class EditAccountActivity extends AppCompatActivity {
                 long mobile = 0;
                 firstName = editTxtFirstName.getText().toString().trim();
                 lastName = editTxtLastName.getText().toString().trim();
-                if(!editTxtMobile.getText().toString().trim().isEmpty()) {
+                if (!editTxtMobile.getText().toString().trim().isEmpty()) {
                     mobile = Long.parseLong(editTxtMobile.getText().toString().trim());
                 }
                 curPass = editTxtCurPass.getText().toString().trim();
                 password = editTxtNewPass.getText().toString().trim();
                 confirm = editTxtConfirmPass.getText().toString().trim();
-                if(changePassClicked) {
-                    if(firstName.isEmpty() || lastName.isEmpty() || mobile == 0 || curPass.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
+                if (changePassClicked) {
+                    if (firstName.isEmpty() || lastName.isEmpty() || mobile == 0 || curPass.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
                         Toast.makeText(EditAccountActivity.this, "Please provide all the fields", Toast.LENGTH_SHORT).show();
-                    } else if(mobile < 1000000000) {
+                    } else if (mobile < 1000000000) {
                         EditAccountActivity.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -80,8 +79,8 @@ public class EditAccountActivity extends AppCompatActivity {
                             }
                         });
                     } else {
-                        if(curPass.equals(pass)) {
-                            if(confirm.equals(password)) {
+                        if (curPass.equals(pass)) {
+                            if (confirm.equals(password)) {
                                 viewModel.update_user(new User(USERNAME, firstName, lastName, mobile, password, balance));
                                 Toast.makeText(EditAccountActivity.this, "Updated Successfully", Toast.LENGTH_SHORT).show();
                                 finish();
@@ -93,9 +92,9 @@ public class EditAccountActivity extends AppCompatActivity {
                         }
                     }
                 } else {
-                    if(firstName.isEmpty() || lastName.isEmpty() || mobile == 0) {
+                    if (firstName.isEmpty() || lastName.isEmpty() || mobile == 0) {
                         Toast.makeText(EditAccountActivity.this, "Please provide all the fields", Toast.LENGTH_SHORT).show();
-                    } else if(mobile < 1000000000) {
+                    } else if (mobile < 1000000000) {
                         EditAccountActivity.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {

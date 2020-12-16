@@ -1,7 +1,6 @@
 package com.example.railwayreservation;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -10,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -38,14 +36,14 @@ public class TTELoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String username = editTxtUsername.getText().toString().trim();
                 final String password = editTxtPass.getText().toString().trim();
-                if(username.isEmpty() || password.isEmpty()) {
+                if (username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(TTELoginActivity.this, "All fields are required!", Toast.LENGTH_SHORT).show();
                 } else {
                     AsyncTask.execute(new Runnable() {
                         @Override
                         public void run() {
                             List<TTE> ttes = repository.getTTEList(username);
-                            if(ttes.size() == 0) {
+                            if (ttes.size() == 0) {
                                 TTELoginActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -53,7 +51,7 @@ public class TTELoginActivity extends AppCompatActivity {
                                     }
                                 });
                             } else {
-                                if(password.equals(ttes.get(0).getPassword())) {
+                                if (password.equals(ttes.get(0).getPassword())) {
                                     editTxtUsername.getText().clear();
                                     editTxtPass.getText().clear();
                                     Intent intent = new Intent(TTELoginActivity.this, TTEAccountActivity.class);

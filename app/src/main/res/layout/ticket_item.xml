@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
@@ -18,71 +17,71 @@
             android:layout_height="wrap_content"
             android:text="Ticket ID"
             android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/train_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/ticket_id"
             android:layout_marginTop="5dp"
             android:text="Train Name"
-            android:textSize="15sp"
-            android:layout_below="@id/ticket_id"/>
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/from_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Departure - Arrival"
+            android:layout_below="@+id/train_name"
             android:layout_marginTop="2dp"
-            android:textSize="15sp"
-            android:layout_below="@+id/train_name"/>
+            android:text="Departure - Arrival"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/start_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Departure Time"
+            android:layout_below="@id/from_to"
             android:layout_marginTop="2dp"
-            android:textSize="15sp"
-            android:layout_below="@id/from_to"/>
+            android:text="Departure Time"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/stop_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Arrival Time"
+            android:layout_below="@id/start_time"
             android:layout_marginTop="2dp"
-            android:textSize="15sp"
-            android:layout_below="@id/start_time"/>
+            android:text="Arrival Time"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/class_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Class Name"
+            android:layout_below="@id/stop_time"
             android:layout_marginTop="2dp"
-            android:textSize="15sp"
-            android:layout_below="@id/stop_time"/>
+            android:text="Class Name"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tickets_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No. of tickets"
+            android:layout_below="@+id/class_name"
             android:layout_marginTop="2dp"
-            android:textSize="15sp"
-            android:layout_below="@+id/class_name"/>
+            android:text="No. of tickets"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Status"
-            android:textColor="@android:color/holo_green_light"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:textSize="24sp"/>
+            android:text="Status"
+            android:textColor="@android:color/holo_green_light"
+            android:textSize="24sp" />
 
     </RelativeLayout>
 

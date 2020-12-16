@@ -9,23 +9,57 @@
         android:roundIcon="@drawable/railway_app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ModifyTrainActivity"></activity>
-        <activity android:name=".AddTTEActivity" />
-        <activity android:name=".AdminActivity" />
-        <activity android:name=".TrainStatusActivity" />
-        <activity android:name=".TicketValidationActivity" />
-        <activity android:name=".TTEAccountActivity" />
-        <activity android:name=".TTELoginActivity" />
-        <activity android:name=".CurrentlyBookedActivity" />
-        <activity android:name=".ServiceDetailsActivity" />
-        <activity android:name=".ServicesListActivity" />
-        <activity android:name=".BookTicketActivity" />
-        <activity android:name=".AddBalanceActivity" />
-        <activity android:name=".EditAccountActivity" />
-        <activity android:name=".AccountActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".ModifyTrainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AddTTEActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AdminActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TrainStatusActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TicketValidationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TTEAccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TTELoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CurrentlyBookedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ServiceDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ServicesListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".BookTicketActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AddBalanceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EditAccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AccountActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

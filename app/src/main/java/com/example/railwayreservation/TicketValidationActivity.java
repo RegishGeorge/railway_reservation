@@ -41,7 +41,7 @@ public class TicketValidationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String ticketID = txtTicketID.getText().toString().trim();
-                if(ticketID.isEmpty()) {
+                if (ticketID.isEmpty()) {
                     txtName.setVisibility(View.GONE);
                     txtFromTo.setVisibility(View.GONE);
                     txtSeats.setVisibility(View.GONE);
@@ -54,7 +54,7 @@ public class TicketValidationActivity extends AppCompatActivity {
                     viewModel.getTicket(tid).observe(TicketValidationActivity.this, new Observer<List<Booking>>() {
                         @Override
                         public void onChanged(List<Booking> bookings) {
-                            if(bookings.size() == 0) {
+                            if (bookings.size() == 0) {
                                 txtName.setVisibility(View.GONE);
                                 txtFromTo.setVisibility(View.GONE);
                                 txtSeats.setVisibility(View.GONE);
@@ -76,10 +76,10 @@ public class TicketValidationActivity extends AppCompatActivity {
                                 txtSeats.setText("No. of Seats: " + tempBooking.getTickets_no());
                                 txtClass.setText("Class Type: " + tempBooking.getClass_name());
                                 txtStatus.setText("Status: " + tempBooking.getStatus());
-                                if(bookings.get(0).getStatus().equals("Booked")) {
+                                if (bookings.get(0).getStatus().equals("Booked")) {
                                     txtStatus.setTextColor(Color.parseColor("#fc8803"));
                                     btnBoarded.setEnabled(true);
-                                } else if(bookings.get(0).getStatus().equals("Boarded")){
+                                } else if (bookings.get(0).getStatus().equals("Boarded")) {
                                     txtStatus.setTextColor(Color.parseColor("#03fc07"));
                                     btnBoarded.setEnabled(false);
                                 } else {

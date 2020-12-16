@@ -15,7 +15,7 @@ public abstract class RailwayReservationDatabase extends RoomDatabase {
     private static RailwayReservationDatabase instance;
 
     public static synchronized RailwayReservationDatabase getInstance(Context context) {
-        if(instance == null) {
+        if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(), RailwayReservationDatabase.class, DB_NAME)
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallBack)
@@ -59,10 +59,10 @@ public abstract class RailwayReservationDatabase extends RoomDatabase {
             railwayReservationDao.insert_station(new Station("Kannur"));
             railwayReservationDao.insert_station(new Station("Kasaragod"));
 
-            railwayReservationDao.insert_train(new Train("Nethravathi", 0,0, 5, 10, 15));
+            railwayReservationDao.insert_train(new Train("Nethravathi", 0, 0, 5, 10, 15));
             railwayReservationDao.insert_train(new Train("Jan Shatabdi Express", 5, 10, 15, 20, 25));
 
-            railwayReservationDao.insert_route_details(new RouteDetails(1, 1, 1, 0, 0, 0,0,0, 0, 0));
+            railwayReservationDao.insert_route_details(new RouteDetails(1, 1, 1, 0, 0, 0, 0, 0, 0, 0));
             railwayReservationDao.insert_route_details(new RouteDetails(1, 2, 2, 1, 5, 40, 30, 25, 20, 10));
             railwayReservationDao.insert_route_details(new RouteDetails(1, 3, 3, 2, 45, 80, 60, 50, 40, 20));
             railwayReservationDao.insert_route_details(new RouteDetails(1, 4, 4, 4, 35, 110, 80, 65, 50, 27));
