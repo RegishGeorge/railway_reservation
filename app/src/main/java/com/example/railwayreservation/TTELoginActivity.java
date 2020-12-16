@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,7 @@ public class TTELoginActivity extends AppCompatActivity {
     private EditText editTxtUsername, editTxtPass;
     private Button btnLogin;
     private RailwayReservationViewModel viewModel;
+    private RailwayReservationRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,20 +31,27 @@ public class TTELoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btn_login);
 
         viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(this.getApplication())).get(RailwayReservationViewModel.class);
+        repository = new RailwayReservationRepository(getApplication());
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String username = editTxtUsername.getText().toString().trim();
+                final String username = editTxtUsername.getText().toString().trim();
                 final String password = editTxtPass.getText().toString().trim();
                 if(username.isEmpty() || password.isEmpty()) {
                     Toast.makeText(TTELoginActivity.this, "All fields are required!", Toast.LENGTH_SHORT).show();
                 } else {
-                    viewModel.getTTEList(username).observe(TTELoginActivity.this, new Observer<List<TTE>>() {
+                    AsyncTask.execute(new Runnable() {
                         @Override
-                        public void onChanged(List<TTE> ttes) {
+                        public void run() {
+                            List<TTE> ttes = repository.getTTEList(username);
                             if(ttes.size() == 0) {
-                                Toast.makeText(TTELoginActivity.this, "Invalid username", Toast.LENGTH_SHORT).show();
+                                TTELoginActivity.this.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(TTELoginActivity.this, "Invalid username", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             } else {
                                 if(password.equals(ttes.get(0).getPassword())) {
                                     editTxtUsername.getText().clear();
@@ -51,13 +60,17 @@ public class TTELoginActivity extends AppCompatActivity {
                                     intent.putExtra("Name", ttes.get(0).getName());
                                     startActivity(intent);
                                 } else {
-                                    Toast.makeText(TTELoginActivity.this, "Incorrect password", Toast.LENGTH_SHORT).show();
+                                    TTELoginActivity.this.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(TTELoginActivity.this, "Incorrect password", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                                 }
                             }
                         }
                     });
                 }
-
             }
         });
     }

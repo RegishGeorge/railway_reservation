@@ -39,40 +39,60 @@ public class TrainStatusActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String routeID = txtRouteID.getText().toString().trim();
                 final String trainID = txtTrainID.getText().toString().trim();
-                Log.d(TAG, "onClick: " + routeID + " " + trainID);
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        int rid = Integer.parseInt(routeID);
-                        int tid = Integer.parseInt(trainID);
-                        Log.d(TAG, "run: rid tid " + rid + " " + tid);
-                        bookings = repository.getAllBookings(rid, tid);
-                        Log.d(TAG, "run: bookings size " + bookings.size());
-                        if(bookings.size() > 0) {
-                            txtRouteID.getText().clear();
-                            txtTrainID.getText().clear();
-                            for(Booking b: bookings) {
-                                b.setStatus("Expired");
-                                repository.update_booking(b);
+                if(routeID.isEmpty() || trainID.isEmpty()) {
+                    Toast.makeText(TrainStatusActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d(TAG, "onClick: " + routeID + " " + trainID);
+                    AsyncTask.execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            int rid = Integer.parseInt(routeID);
+                            int tid = Integer.parseInt(trainID);
+                            Log.d(TAG, "run: rid tid " + rid + " " + tid);
+                            bookings = repository.getAllBookings(rid, tid);
+                            Log.d(TAG, "run: bookings size " + bookings.size());
+                            if(bookings.size() > 0) {
+                                txtRouteID.getText().clear();
+                                txtTrainID.getText().clear();
+                                for(Booking b: bookings) {
+                                    b.setStatus("Expired");
+                                    repository.update_booking(b);
+                                }
+                                deleteTrainSeats(rid, tid);
+                            } else {
+                                TrainStatusActivity.this.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(TrainStatusActivity.this, "No bookings found for this train!", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+                                });
                             }
                         }
+                    });
+
+                }
+            }
+        });
+    }
+
+    private void deleteTrainSeats(final int rid, final int tid) {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                trainSeats = repository.getList(rid, tid);
+                if(trainSeats.size() > 0) {
+                    for(TrainSeat ts: trainSeats) {
+                        repository.delete_train_seat(ts);
                     }
-                });
-                AsyncTask.execute(new Runnable() {
+                }
+                TrainStatusActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        int rid = Integer.parseInt(routeID);
-                        int tid = Integer.parseInt(trainID);
-                        trainSeats = repository.getList(rid, tid);
-                        if(trainSeats.size() > 0) {
-                            for(TrainSeat ts: trainSeats) {
-                                repository.delete_train_seat(ts);
-                            }
-                        }
+                        Toast.makeText(TrainStatusActivity.this, "Successfully updated", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 });
-                Toast.makeText(TrainStatusActivity.this, "Successfully updated", Toast.LENGTH_SHORT).show();
-                finish();
             }
         });
     }

@@ -22,10 +22,11 @@ public class RailwayReservationRepository {
     private LiveData<List<Integer>> stationID;
     private List<TrainSeat> trainSeat;
     private LiveData<List<Booking>> bookings;
-    private LiveData<List<TTE>> TTEList;
+    private List<TTE> TTEList;
     private LiveData<List<Booking>> ticket;
     private List<Booking> allBookings;
     private List<TrainSeat> list;
+    private List<TrainSeat> trainList;
 
     public RailwayReservationRepository(Application application) {
         RailwayReservationDatabase database = RailwayReservationDatabase.getInstance(application);
@@ -59,6 +60,10 @@ public class RailwayReservationRepository {
 
     public void update_booking(Booking booking) {
         new UpdateBookingAsyncTask(railwayReservationDao).execute(booking);
+    }
+
+    public void update_train(Train train) {
+        new UpdateTrainAsyncTask(railwayReservationDao).execute(train);
     }
 
     public void delete_train_seat(TrainSeat trainSeat) {
@@ -109,7 +114,7 @@ public class RailwayReservationRepository {
         return bookings;
     }
 
-    public LiveData<List<TTE>> getTTEList(String username) {
+    public List<TTE> getTTEList(String username) {
         TTEList = railwayReservationDao.getTTEList(username);
         return TTEList;
     }
@@ -127,6 +132,15 @@ public class RailwayReservationRepository {
     public List<TrainSeat> getList(int rid, int tid) {
         list = railwayReservationDao.getList(rid, tid);
         return list;
+    }
+
+    public List<TrainSeat> getTrainList(int tid) {
+        trainList = railwayReservationDao.getTrainList(tid);
+        return trainList;
+    }
+
+    public void delete_trains(int tid) {
+        railwayReservationDao.delete_trains(tid);
     }
 
     private static class InsertUserAsyncTask extends AsyncTask<User, Void, Void> {
@@ -223,6 +237,20 @@ public class RailwayReservationRepository {
         @Override
         protected Void doInBackground(Booking... bookings) {
             railwayReservationDao.update_booking(bookings[0]);
+            return null;
+        }
+    }
+
+    private static class UpdateTrainAsyncTask extends AsyncTask<Train, Void, Void> {
+        private RailwayReservationDao railwayReservationDao;
+
+        private UpdateTrainAsyncTask(RailwayReservationDao railwayReservationDao) {
+            this.railwayReservationDao = railwayReservationDao;
+        }
+
+        @Override
+        protected Void doInBackground(Train... trains) {
+            railwayReservationDao.update_train(trains[0]);
             return null;
         }
     }

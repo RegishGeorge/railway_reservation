@@ -47,6 +47,9 @@ public interface RailwayReservationDao {
     @Update
     void update_booking(Booking booking);
 
+    @Update
+    void update_train(Train train);
+
     @Delete
     void delete_train_seat(TrainSeat trainSeat);
 
@@ -87,7 +90,7 @@ public interface RailwayReservationDao {
     LiveData<List<Booking>> getBookings(String username);
 
     @Query("SELECT * FROM TTE WHERE username = :username")
-    LiveData<List<TTE>> getTTEList(String username);
+    List<TTE> getTTEList(String username);
 
     @Query("SELECT * FROM BOOKING WHERE ticket_id = :tid")
     LiveData<List<Booking>> getTicket(long tid);
@@ -97,4 +100,10 @@ public interface RailwayReservationDao {
 
     @Query("SELECT * FROM TRAINSEAT WHERE route_id = :rid AND train_id = :tid")
     List<TrainSeat> getList(int rid, int tid);
+
+    @Query("SELECT * FROM TRAINSEAT WHERE train_id = :tid")
+    List<TrainSeat> getTrainList(int tid);
+
+    @Query("DELETE FROM TRAINSEAT WHERE train_id = :tid")
+    void delete_trains(int tid);
 }

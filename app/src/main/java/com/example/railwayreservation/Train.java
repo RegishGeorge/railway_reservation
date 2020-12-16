@@ -1,6 +1,7 @@
 package com.example.railwayreservation;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -14,6 +15,17 @@ public class Train {
     private int ac3_no;
     private int cc_no;
     private int sleeper_no;
+
+    @Ignore
+    public Train(int train_id, String train_name, int ac1_no, int ac2_no, int ac3_no, int cc_no, int sleeper_no) {
+        this.train_id = train_id;
+        this.train_name = train_name;
+        this.ac1_no = ac1_no;
+        this.ac2_no = ac2_no;
+        this.ac3_no = ac3_no;
+        this.cc_no = cc_no;
+        this.sleeper_no = sleeper_no;
+    }
 
     public Train(String train_name, int ac1_no, int ac2_no, int ac3_no, int cc_no, int sleeper_no) {
         this.train_name = train_name;

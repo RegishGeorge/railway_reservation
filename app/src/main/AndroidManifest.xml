@@ -9,7 +9,8 @@
         android:roundIcon="@drawable/railway_app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddTTEActivity"></activity>
+        <activity android:name=".ModifyTrainActivity"></activity>
+        <activity android:name=".AddTTEActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".TrainStatusActivity" />
         <activity android:name=".TicketValidationActivity" />

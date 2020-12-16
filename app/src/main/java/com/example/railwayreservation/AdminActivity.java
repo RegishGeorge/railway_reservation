@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 public class AdminActivity extends AppCompatActivity {
     private TextView txtHello;
-    private Button btnAddTTE;
+    private Button btnAddTTE, btnModify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +21,22 @@ public class AdminActivity extends AppCompatActivity {
 
         txtHello = findViewById(R.id.text_Hello);
         btnAddTTE = findViewById(R.id.btn_add_tte);
+        btnModify = findViewById(R.id.btn_modify);
 
         txtHello.setText(msg);
+
         btnAddTTE.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AdminActivity.this, AddTTEActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnModify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminActivity.this, ModifyTrainActivity.class);
                 startActivity(intent);
             }
         });

@@ -22,6 +22,7 @@ public class RailwayReservationViewModel extends AndroidViewModel {
     private LiveData<List<Booking>> bookings;
     private LiveData<List<TTE>> TTEList;
     private LiveData<List<Booking>> ticket;
+    private LiveData<List<TrainSeat>> trainList;
 
     public RailwayReservationViewModel(@NonNull Application application) {
         super(application);
@@ -57,6 +58,14 @@ public class RailwayReservationViewModel extends AndroidViewModel {
         repository.update_booking(booking);
     }
 
+    public void update_train(Train train) {
+        repository.update_train(train);
+    }
+
+    public void delete_train_seat(TrainSeat trainSeat) {
+        repository.delete_train_seat(trainSeat);
+    }
+
     public LiveData<List<String>> getAllStations() {
         return allStations;
     }
@@ -89,11 +98,6 @@ public class RailwayReservationViewModel extends AndroidViewModel {
     public LiveData<List<Booking>> getBookings(String username) {
         bookings = repository.getBookings(username);
         return bookings;
-    }
-
-    public LiveData<List<TTE>> getTTEList(String username) {
-        TTEList = repository.getTTEList(username);
-        return TTEList;
     }
 
     public LiveData<List<Booking>> getTicket(long tid) {
